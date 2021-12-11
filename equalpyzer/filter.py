@@ -1,13 +1,13 @@
 import numpy as np
-from matplotlib import pyplot as plt
-
-from scipy.signal import butter
-from scipy.signal.signaltools import sosfilt
 import scipy.io.wavfile as wf
 
-from typing import Tuple
+from numpy import ndarray
+from scipy.signal import butter
+from scipy.signal.signaltools import sosfilt
 
+from typing import Tuple
 from equalizer import dbfs_rfft, plot_dbfs
+from matplotlib import pyplot as plt
 
 
 # cut-offs for 10 bandpass filters
@@ -23,13 +23,13 @@ super_highs = (4001, 8000)
 ultra_highs = (8001, 16000)
 
 
-def bandpass_filter(signal: np.ndarray, cutoffs: Tuple[int, int], fs: int, order: int = 5) -> np.ndarray:
+def bandpass_filter(signal: ndarray, cutoffs: Tuple[int, int], fs: int, order: int = 5) -> ndarray:
     """Returns the given signal filtered at given lowcut and highcut frequencies.
 
         Args:
             signal: The input signal.
             cutoffs: The lower and higher cut-off frequencies. Must be specified in this exact order.
-            sample_rate: The input signals' sample rate.
+            fs: The input signals' sample rate.
             order: (optional) The order of the filter.
 
         Returns:
@@ -49,12 +49,11 @@ def bandpass_filter(signal: np.ndarray, cutoffs: Tuple[int, int], fs: int, order
 
 
 def main():
-
     # Take slice
     N = 8192
     win = np.hamming(N)
 
-    fs, signal = wf.read('./examples/16-bit-signed-mono.wav')
+    fs, signal = wf.read('../examples/16-bit-signed-mono.wav')
     filtered_signal = bandpass_filter(signal, highs, fs)
     frequencies, dbfs_amp = dbfs_rfft(filtered_signal[0:N], fs, win)
     plot_dbfs(frequencies, dbfs_amp)
