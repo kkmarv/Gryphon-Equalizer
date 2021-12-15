@@ -4,29 +4,48 @@ from numpy import ndarray
 from scipy.io import wavfile as wf
 from matplotlib import pyplot as plt
 
-from typing import Tuple, Union
+from typing import Union
 
 
 class Equalizer:
     def __init__(self):
-        self.__sample_rate: Union[int, None] = None
-        self.__time_domain: Union[ndarray, None] = None
-        self.__freq_domain: Union[ndarray, None] = None
-        self.__normalizer: Union[int, None] = None  # loudest sample in the file
+        self._signal: Union[ndarray, None] = None
+        self._sample_rate: Union[int, None] = None
+        self._normalizer: Union[int, None] = None  # value of loudest sample in the signal
+
+        self._amplitudes: Union[ndarray, None] = None
+        self._frequencies: Union[ndarray, None] = None
+        self._amplitudes_db: Union[ndarray, None] = None
+
+        # frequency labels
+        self._x_ticks = [20, 31, 62, 125, 250, 500, 1000, 2000, 4000, 8000, 16000]
+        self._x_labels = ['20', '31', '62', '125', '250', '500', '1k', '2k', '4k', '8k', '16k']
 
     def load_signal(self, path: str) -> None:
-        self.__sample_rate, self.__time_domain = wf.read(path)
-        self.__normalizer = np.max(self.__time_domain)
+        self._sample_rate, self._signal = wf.read(path)
+        self._normalizer = np.max(self._signal)
+
+    def save_signal(self, path: str) -> None:
+        wf.write(path, self._sample_rate, np.round(np.fft.irfft(self.amplitudes)).astype('int16'))
+
+    def amplify(self, gain: float, low_cut: int = 0, high_cut: Union[int, None] = None):
+        if high_cut is None:
+            high_cut = self.frequencies[-1]  # set to highest frequency in the signal
+        if low_cut > high_cut:
+            raise ValueError('Low-cut frequency cannot be higher than high-cut frequency!')
+
+        self.amplitudes[(self.frequencies > low_cut) & (self.frequencies < high_cut)] *= gain
+        self._amplitudes_db = None  # delete the old db scale
 
     def plot_time_domain(self) -> None:
-        n: int = len(self.__time_domain)  # number of samples
-        sec: float = n / self.__sample_rate  # length of file in seconds
+        n: int = len(self._signal)  # number of samples
+        sec: float = n / self._sample_rate  # length of signal in seconds
 
-        x_values: ndarray = self.__time_domain / self.__normalizer  # normalize values
-        y_values: ndarray = np.linspace(start=0, stop=sec, num=n)  # calculate the scaling of y axis
+        y_values: ndarray = self._signal / self._normalizer  # normalize values to [-1, 1]
+        x_values: ndarray = np.linspace(start=0, stop=sec, num=n)  # calculate the sampling on x axis
 
         # plot graph and set visual parameters
-        plt.plot(y_values, x_values)
+        plt.plot(x_values, y_values)
         plt.xlim(left=0, right=sec)
         plt.ylim(top=1, bottom=-1)
         plt.xlabel('Time [sec]')
@@ -35,77 +54,62 @@ class Equalizer:
         plt.show()
 
     def plot_freq_domain(self) -> None:
-        n = len(self.__time_domain)  # number of time domain samples
-        sec: float = n / self.__sample_rate  # length of file in seconds
-
-        # scale the magnitude of the fft by and factor of 2,
-        # because we are using only half of the fft spectrum
-        # and normalize it by the number of frequency samples
-        scaled_x_values = np.abs(self.freq_domain) * 2 / len(self.freq_domain)
-
-        # convert to dBFS (decibels full scale)
-        db_x_values = 20 * np.log10(scaled_x_values / self.__normalizer)
-
-        # calculate the scaling of y axis
-        y_values = np.arange((n / 2) + 1) / sec
-
-        # frequency labels
-        x_ticks = [31, 62, 125, 250, 500, 1000, 2000, 4000, 8000, 16000]
-        x_labels = ['31', '62', '125', '250', '500', '1k', '2k', '4k', '8k', '16k']
+        y_values: ndarray = self.amplitudes / np.max(self.amplitudes)  # normalize values to [-1, 1]
+        x_values: ndarray = self.frequencies
 
         # plot graph and set visual parameters
-        plt.plot(y_values, db_x_values)
+        plt.plot(x_values, y_values)
+        plt.xscale('log')
+        plt.xticks(self._x_ticks, self._x_labels)
+        plt.xlim(left=20, right=20000)
+        plt.ylim(top=1, bottom=-1)
+        plt.xlabel('Frequency [Hz]')
+        plt.ylabel('Amplitude')
+        plt.show()
+
+    def plot_freq_domain_db(self) -> None:
+        y_values: ndarray = self.amplitudes_db
+        x_values: ndarray = self.frequencies
+
+        # plot graph and set visual parameters
+        plt.plot(x_values, y_values)
         plt.grid(True)
         plt.xscale('log')
-        plt.xticks(x_ticks, x_labels)
-        plt.xlim(right=20000)
+        plt.xticks(self._x_ticks, self._x_labels)
+        plt.xlim(left=20, right=20000)
         plt.ylim(top=0, bottom=-90)
         plt.xlabel('Frequency [Hz]')
         plt.ylabel('Amplitude [dBFS]')
-        plt.fill_between(y_values, db_x_values, -90)
+        plt.fill_between(x_values, y_values, -90)
         plt.show()
 
     @property
-    def freq_domain(self) -> ndarray:
-        if self.__freq_domain is None:  # if we did not calculate the frequency domain yet
-            self.__freq_domain = np.fft.rfft(self.__time_domain)
-        return self.__freq_domain
+    def amplitudes(self) -> ndarray:
+        """Amplitudes from FFT"""
+        if self._amplitudes is None:  # if we did not calculate the frequency domain yet
+            self._amplitudes = np.fft.rfft(self._signal)
+        return self._amplitudes
 
+    @property
+    def frequencies(self) -> ndarray:
+        """Frequencies from FFT"""
+        if self._frequencies is None:
+            self._frequencies = np.fft.rfftfreq(self._signal.size, 1 / self._sample_rate)
+        return self._frequencies
 
-def dbfs_rfft(signal: ndarray, fs: int, window: ndarray = None, ref: int = 32768) -> Tuple[ndarray, ndarray]:
-    """
-    Calculate spectrum in dBFS (decibels full scale)
+    @property
+    def amplitudes_db(self) -> ndarray:
+        """Amplitudes from FFT but with dBFS scaling"""
+        if self._amplitudes_db is None:
+            # scale the amplitude of the fft by a factor of 2,
+            # because we are using only half of the fft spectrum
+            # (and normalize it by the number of frequency samples) # TODO Is this wrong?
+            scaled_freq_values = np.abs(self.amplitudes) * 2 / len(self.amplitudes)  # TODO abs() necessary?
 
-    Args:
-        signal: input signal
-        fs: sampling frequency
-        window: vector containing window samples (same length as x).
-             If not provided, then a rectangular window is used by default.
-        ref: reference value used for dBFS scale. 32768 for int16, 8388608 for int24 and 1 for float
+            # convert to dBFS (decibels full scale)
+            self._amplitudes_db = 20 * np.log10(scaled_freq_values / self._normalizer)
 
-    Returns:
-        frequencies: frequency vector & dbfs_amp: spectrum in dBFS scale
-    """
-
-    N = len(signal)  # Length of input sequence
-
-    if window is None:
-        window = np.ones(N)
-    if len(signal) != len(window):
-        raise ValueError('Signal and window must be of the same length')
-    signal = signal * window
-
-    # Calculate real FFT and frequency vector
-    amplitudes = np.fft.rfft(signal)
-    frequencies = np.arange((N / 2) + 1) / (float(N) / fs)
-
-    # Scale the magnitude of FFT by window and factor of 2, because we are using only half of FFT spectrum.
-    scaled_amp = np.abs(amplitudes) * 2 / np.sum(window)
-
-    # Convert to dBFS
-    dbfs_amp = 20 * np.log10(scaled_amp / ref)
-
-    return frequencies, dbfs_amp
+        return self._amplitudes_db
 
 
 def main():
@@ -118,8 +122,16 @@ def main():
 
     eq = Equalizer()
     eq.load_signal(b)
-    eq.plot_time_domain()
+
     eq.plot_freq_domain()
+    eq.plot_freq_domain_db()
+
+    eq.amplify(0, 0, 200)
+
+    eq.plot_freq_domain()
+    eq.plot_freq_domain_db()
+
+    eq.save_signal('rawr.wav')
 
 
 if __name__ == "__main__":
