@@ -18,8 +18,8 @@ class Equalizer:
         self._amplitudes_db: Union[ndarray, None] = None
 
         # frequency labels for logarithmic x axis
-        self._x_ticks = [20, 31, 62, 125, 250, 500, 1000, 2000, 4000, 8000, 16000]
-        self._x_labels = ['20', '31', '62', '125', '250', '500', '1k', '2k', '4k', '8k', '16k']
+        self._x_ticks: ndarray = np.asarray([20, 31, 62, 125, 250, 500, 1000, 2000, 4000, 8000, 16000])
+        self._x_labels: ndarray = np.asarray(['20', '31', '62', '125', '250', '500', '1k', '2k', '4k', '8k', '16k'])
 
     def load_signal(self, path: str) -> None:
         self._sample_rate, self._input_signal = wf.read(path)
