@@ -1,7 +1,8 @@
 import matplotlib
+import numpy as np
 
+from numpy import ndarray
 from matplotlib.axes import Axes
-from matplotlib.lines import Line2D
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
 
@@ -10,20 +11,76 @@ matplotlib.use('QtAgg')
 
 
 class EQCanvas(FigureCanvasQTAgg):
-    """Matplotlib canvas for displaying the equalizer plot."""
+    """Matplotlib canvas as a QWidget. It displays the equalizer plot."""
 
-    def __init__(self, initial_x_values, initial_y_values, width=6.4, height=4.8, dpi=100):
+    def __init__(self, width=6.4, height=4.8, dpi=100):
+        # create figure and axes
         self._figure: Figure = Figure(figsize=(width, height), dpi=dpi)
-        self._figure.set_canvas(self)
+        self._axes: Axes = self._figure.add_subplot()
 
         super(EQCanvas, self).__init__(self._figure)
+        self._figure.set_canvas(self)  # set this class as the figure's canvas
 
-        self._axes: Axes = self._figure.add_subplot()
-        self.plot: Line2D = self._axes.plot(initial_x_values, initial_y_values)[0]
+        # frequency labels for logarithmic x axis scaling
+        self._x_ticks: ndarray = np.asarray([20, 31, 62, 125, 250, 500, 1000, 2000, 4000, 8000, 16000])
+        self._x_labels: ndarray = np.asarray(['20', '31', '62', '125', '250', '500', '1k', '2k', '4k', '8k', '16k'])
 
-    def update_y_values(self, y_values) -> None:
-        self.plot.set_ydata(y_values)
-        self.draw()
+    def plot_time_domain(self, input_signal, duration, num_of_samples, max_sample_value, normalize=True) -> None:
+        x_values: ndarray = np.linspace(start=0, stop=duration, num=num_of_samples)  # calculate the sampling on x axis
+        y_values: ndarray = input_signal / max_sample_value if normalize else input_signal  # normalize values to [-1, 1]
 
-    def __del__(self) -> None:
-        matplotlib.pyplot.close(self._figure)
+        axes: Axes = self._axes
+        axes.clear()
+
+        print(len(y_values))
+
+        # plot graph and set visual parameters
+        axes.plot(x_values, y_values)
+        axes.set_xlim(left=0, right=duration)
+        axes.set_ylim(top=1, bottom=-1) if normalize else None
+        axes.set_xlabel('Time [sec]')
+        axes.set_ylabel('Amplitude')
+        axes.grid(True)
+
+        self.draw()  # draw the graph
+
+    def plot_freq_domain(self, frequencies, amplitudes, normalize=True) -> None:
+        x_values: ndarray = frequencies
+        y_values: ndarray = amplitudes / np.max(amplitudes) if normalize else amplitudes  # normalize values to [-1, 1]
+
+        axes: Axes = self._axes
+        axes.clear()
+
+        print(len(y_values))
+
+        # plot graph and set visual parameters
+        axes.plot(x_values, y_values)
+        axes.set_xscale('log')
+        axes.set_xticks(self._x_ticks, self._x_labels)
+        axes.set_xlim(left=20, right=20000)
+        axes.set_ylim(top=1, bottom=-1) if normalize else None
+        axes.set_xlabel('Frequency [Hz]')
+        axes.set_ylabel('Amplitude')
+
+        self.draw()  # draw the graph
+
+    def plot_freq_domain_db(self, frequencies, amplitudes_db) -> None:
+        x_values: ndarray = frequencies
+        y_values: ndarray = amplitudes_db
+
+        axes: Axes = self._axes
+        axes.clear()
+
+        # plot graph and set visual parameters
+        axes.plot(x_values, y_values)
+        axes.set_xscale('log')
+        axes.set_xticks(self._x_ticks, self._x_labels)
+        axes.set_xlim(left=20, right=20000)
+        axes.set_ylim(top=0, bottom=-90)
+        axes.set_xlabel('Frequency [Hz]')
+        axes.set_ylabel('Amplitude [dBFS]')
+        axes.fill_between(x_values, y_values, -90)
+
+        axes.grid(True)
+
+        self.draw()  # draw the graph
