@@ -32,8 +32,6 @@ class EQCanvas(FigureCanvasQTAgg):
         axes: Axes = self._axes
         axes.clear()
 
-        print(len(y_values))
-
         # plot graph and set visual parameters
         axes.plot(x_values, y_values)
         axes.set_xlim(left=0, right=duration)
@@ -50,8 +48,6 @@ class EQCanvas(FigureCanvasQTAgg):
 
         axes: Axes = self._axes
         axes.clear()
-
-        print(len(y_values))
 
         # plot graph and set visual parameters
         axes.plot(x_values, y_values)
@@ -80,7 +76,6 @@ class EQCanvas(FigureCanvasQTAgg):
         axes.set_xlabel('Frequency [Hz]')
         axes.set_ylabel('Amplitude [dBFS]')
         axes.fill_between(x_values, y_values, -90)
-
         axes.grid(True)
 
         self.draw()  # draw the graph
