@@ -5,7 +5,7 @@ from PyQt6 import uic
 class DialWidget(QWidget):
     def __init__(self):
         super().__init__()
-        uic.loadUi('dial_widget.ui', self)
+        uic.loadUi('resources/dial_widget.ui', self)
 
 
     def reset_dials(self):

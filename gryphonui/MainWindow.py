@@ -19,13 +19,13 @@ class MainWindow(QMainWindow):
 
         self.setWindowTitle("Any Jammers In Chat?")
         self.setWindowIcon(QtGui.QIcon('resources/pepe_jam.png'))
-        self.resize(960, 540)
         self.first_play = True
         self.paused = False
         self.topwindow = TopWindow()
         self.buttons = ButtonWidget()
         self.connect_buttons()
         self.init_gui()
+        self.setFixedSize(960, 540)
 
 
     def init_gui(self):
@@ -179,7 +179,7 @@ class MainWindow(QMainWindow):
 
 
 def create_gui_window():
-    app = QApplication(sys.argv)
+    app = QApplication([])
     window = MainWindow()
     window.show()
 
