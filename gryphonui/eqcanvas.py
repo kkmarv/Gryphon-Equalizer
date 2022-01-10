@@ -22,10 +22,11 @@ class EQCanvas(FigureCanvasQTAgg):
         self._figure.set_canvas(self)  # set this class as the figure's canvas
 
         # frequency labels for logarithmic x axis scaling
-        self._x_ticks: ndarray = np.asarray([20, 31, 62, 125, 250, 500, 1000, 2000, 4000, 8000, 16000])
-        self._x_labels: ndarray = np.asarray(['20', '31', '62', '125', '250', '500', '1k', '2k', '4k', '8k', '16k'])
+        self._X_TICKS: ndarray = np.asarray([20, 31, 62, 125, 250, 500, 1000, 2000, 4000, 8000, 16000])
+        self._X_LABELS: ndarray = np.asarray(['20', '31', '62', '125', '250', '500', '1k', '2k', '4k', '8k', '16k'])
 
-    def plot_time_domain(self, input_signal, duration, num_of_samples, max_sample_value, normalize=True) -> None:
+    def plot_time_domain(self, input_signal: ndarray, duration: float, num_of_samples: int, max_sample_value: int,
+                         normalize=True) -> None:
         x_values: ndarray = np.linspace(start=0, stop=duration, num=num_of_samples)  # calculate the sampling on x axis
         y_values: ndarray = input_signal / max_sample_value if normalize else input_signal  # normalize values to [-1, 1]
 
@@ -42,7 +43,7 @@ class EQCanvas(FigureCanvasQTAgg):
 
         self.draw()  # draw the graph
 
-    def plot_freq_domain(self, frequencies, amplitudes, normalize=True) -> None:
+    def plot_freq_domain(self, frequencies: ndarray, amplitudes: ndarray, normalize=True) -> None:
         x_values: ndarray = frequencies
         y_values: ndarray = amplitudes / np.max(amplitudes) if normalize else amplitudes  # normalize values to [-1, 1]
 
@@ -52,7 +53,7 @@ class EQCanvas(FigureCanvasQTAgg):
         # plot graph and set visual parameters
         axes.plot(x_values, y_values)
         axes.set_xscale('log')
-        axes.set_xticks(self._x_ticks, self._x_labels)
+        axes.set_xticks(self._X_TICKS, self._X_LABELS)
         axes.set_xlim(left=20, right=20000)
         axes.set_ylim(top=1, bottom=-1) if normalize else None
         axes.set_xlabel('Frequency [Hz]')
@@ -60,7 +61,7 @@ class EQCanvas(FigureCanvasQTAgg):
 
         self.draw()  # draw the graph
 
-    def plot_freq_domain_db(self, frequencies, amplitudes_db) -> None:
+    def plot_freq_domain_db(self, frequencies: ndarray, amplitudes_db: ndarray) -> None:
         x_values: ndarray = frequencies
         y_values: ndarray = amplitudes_db
 
@@ -70,7 +71,7 @@ class EQCanvas(FigureCanvasQTAgg):
         # plot graph and set visual parameters
         axes.plot(x_values, y_values)
         axes.set_xscale('log')
-        axes.set_xticks(self._x_ticks, self._x_labels)
+        axes.set_xticks(self._X_TICKS, self._X_LABELS)
         axes.set_xlim(left=20, right=20000)
         axes.set_ylim(top=0, bottom=-90)
         axes.set_xlabel('Frequency [Hz]')

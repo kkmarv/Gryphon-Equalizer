@@ -1,11 +1,10 @@
 import numpy as np
 
-from wavfile import Wavfile
-
 from numpy import ndarray
 from scipy.io import wavfile as wf
-
 from typing import Union
+
+from equalpyzer.wavfile import Wavfile
 
 
 class Equalizer:
