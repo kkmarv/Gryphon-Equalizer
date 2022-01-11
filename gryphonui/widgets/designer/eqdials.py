@@ -1,12 +1,14 @@
-from PyQt6.QtWidgets import QWidget
 from PyQt6 import uic
+from PyQt6.QtWidgets import QWidget
 
 
-class DialWidget(QWidget):
+class EQDials(QWidget):
     def __init__(self):
         super().__init__()
-        uic.loadUi('resources/dial_widget.ui', self)
+        self.dial_1, self.dial_2, self.dial_3, self.dial_4, self.dial_5 = None, None, None, None, None
+        self.dial_6, self.dial_7, self.dial_8, self.dial_9, self.dial_10 = None, None, None, None, None
 
+        uic.loadUi('assets/dial_widget.ui', self)  # load in those dials
 
     def reset_dials(self):
         self.dial_1.setValue(0)

@@ -8,7 +8,7 @@ from equalpyzer.wavfile import Wavfile
 
 
 class Equalizer:
-    """Equalizer that can be used to manipulate frequency bands of a signal read from a wavfile."""
+    """Equalizer that can be used to manipulate frequency bands of a signal read from a wave file."""
 
     def __init__(self, wavfile):
         self._wav: Wavfile = wavfile
