@@ -6,7 +6,7 @@ from matplotlib.axes import Axes
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
 
-
+# TODO remove minor ticks in freq domain graph
 matplotlib.use('QtAgg')
 
 
@@ -40,6 +40,7 @@ class EQCanvas(FigureCanvasQTAgg):
         axes.set_xlabel('Time [sec]')
         axes.set_ylabel('Amplitude')
         axes.grid(True)
+        axes.set_axisbelow(True)
 
         self.draw()  # draw the graph
 
@@ -58,6 +59,8 @@ class EQCanvas(FigureCanvasQTAgg):
         axes.set_ylim(top=1, bottom=-1) if normalize else None
         axes.set_xlabel('Frequency [Hz]')
         axes.set_ylabel('Amplitude')
+        axes.grid(True)
+        axes.set_axisbelow(True)
 
         self.draw()  # draw the graph
 
@@ -78,5 +81,6 @@ class EQCanvas(FigureCanvasQTAgg):
         axes.set_ylabel('Amplitude [dBFS]')
         axes.fill_between(x_values, y_values, -90)
         axes.grid(True)
+        axes.set_axisbelow(True)
 
         self.draw()  # draw the graph
