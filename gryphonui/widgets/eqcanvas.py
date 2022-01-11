@@ -15,7 +15,7 @@ class EQCanvas(FigureCanvasQTAgg):
 
     def __init__(self, width=6.4, height=4.8, dpi=100):
         # create figure and axes
-        self._figure: Figure = Figure(figsize=(width, height), dpi=dpi)
+        self._figure: Figure = Figure(figsize=(width, height), dpi=dpi, facecolor='#f0f0f0')
         self._axes: Axes = self._figure.add_subplot()
 
         super(EQCanvas, self).__init__(self._figure)
