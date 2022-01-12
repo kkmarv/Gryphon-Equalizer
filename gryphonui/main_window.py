@@ -61,30 +61,90 @@ class MainWindow(QMainWindow):
         menu_bar.change_view_to_freq_action.triggered.connect(lambda: self.update_plot('frequency'))
         menu_bar.change_view_to_freqdb_action.triggered.connect(lambda: self.update_plot('frequency-db'))
 
-    def connect_buttons(self):  # TODO outsource further into own EQDial and EQPlayer class
+    def connect_buttons(self):  # TODO outsource further into own EQDial and EQPlayer class sonst pussy
         self._eq_control_buttons.PlayPauseButton.setEnabled(False)
         self._eq_control_buttons.ResetDialsButton.clicked.connect(lambda: self._eq_widget.eq_dials.reset_dials())
 
-        self._eq_widget.eq_dials.dial_1.valueChanged.connect(lambda: self._eq_widget.eq_dials.value_1.setText(
-            str(self._eq_widget.eq_dials.dial_1.value()) + " dB"))
-        self._eq_widget.eq_dials.dial_2.valueChanged.connect(lambda: self._eq_widget.eq_dials.value_2.setText(
-            str(self._eq_widget.eq_dials.dial_2.value()) + " dB"))
-        self._eq_widget.eq_dials.dial_3.valueChanged.connect(lambda: self._eq_widget.eq_dials.value_3.setText(
-            str(self._eq_widget.eq_dials.dial_3.value()) + " dB"))
-        self._eq_widget.eq_dials.dial_4.valueChanged.connect(lambda: self._eq_widget.eq_dials.value_4.setText(
-            str(self._eq_widget.eq_dials.dial_4.value()) + " dB"))
-        self._eq_widget.eq_dials.dial_5.valueChanged.connect(lambda: self._eq_widget.eq_dials.value_5.setText(
-            str(self._eq_widget.eq_dials.dial_5.value()) + " dB"))
-        self._eq_widget.eq_dials.dial_6.valueChanged.connect(lambda: self._eq_widget.eq_dials.value_6.setText(
-            str(self._eq_widget.eq_dials.dial_6.value()) + " dB"))
-        self._eq_widget.eq_dials.dial_7.valueChanged.connect(lambda: self._eq_widget.eq_dials.value_7.setText(
-            str(self._eq_widget.eq_dials.dial_7.value()) + " dB"))
-        self._eq_widget.eq_dials.dial_8.valueChanged.connect(lambda: self._eq_widget.eq_dials.value_8.setText(
-            str(self._eq_widget.eq_dials.dial_8.value()) + " dB"))
-        self._eq_widget.eq_dials.dial_9.valueChanged.connect(lambda: self._eq_widget.eq_dials.value_9.setText(
-            str(self._eq_widget.eq_dials.dial_9.value()) + " dB"))
-        self._eq_widget.eq_dials.dial_10.valueChanged.connect(lambda: self._eq_widget.eq_dials.value_10.setText(
-            str(self._eq_widget.eq_dials.dial_10.value()) + " dB"))
+        self._eq_widget.eq_dials.dial_1.valueChanged.connect(
+            lambda: self._eq_widget.eq_dials.value_1.setText(
+                '{0:{1}} dB'.format(
+                    self._eq_widget.eq_dials.dial_1.value(),
+                    '+' if self._eq_widget.eq_dials.dial_1.value() > 0 else ' '
+                )
+            )
+        )
+        self._eq_widget.eq_dials.dial_2.valueChanged.connect(
+            lambda: self._eq_widget.eq_dials.value_2.setText(
+                '{0:{1}} dB'.format(
+                    self._eq_widget.eq_dials.dial_2.value(),
+                    '+' if self._eq_widget.eq_dials.dial_2.value() > 0 else ' '
+                )
+            )
+        )
+        self._eq_widget.eq_dials.dial_3.valueChanged.connect(
+            lambda: self._eq_widget.eq_dials.value_3.setText(
+                '{0:{1}} dB'.format(
+                    self._eq_widget.eq_dials.dial_3.value(),
+                    '+' if self._eq_widget.eq_dials.dial_3.value() > 0 else ' '
+                )
+            )
+        )
+        self._eq_widget.eq_dials.dial_4.valueChanged.connect(
+            lambda: self._eq_widget.eq_dials.value_4.setText(
+                '{0:{1}} dB'.format(
+                    self._eq_widget.eq_dials.dial_4.value(),
+                    '+' if self._eq_widget.eq_dials.dial_4.value() > 0 else ' '
+                )
+            )
+        )
+        self._eq_widget.eq_dials.dial_5.valueChanged.connect(
+            lambda: self._eq_widget.eq_dials.value_5.setText(
+                '{0:{1}} dB'.format(
+                    self._eq_widget.eq_dials.dial_5.value(),
+                    '+' if self._eq_widget.eq_dials.dial_5.value() > 0 else ' '
+                )
+            )
+        )
+        self._eq_widget.eq_dials.dial_6.valueChanged.connect(
+            lambda: self._eq_widget.eq_dials.value_6.setText(
+                '{0:{1}} dB'.format(
+                    self._eq_widget.eq_dials.dial_6.value(),
+                    '+' if self._eq_widget.eq_dials.dial_6.value() > 0 else ' '
+                )
+            )
+        )
+        self._eq_widget.eq_dials.dial_7.valueChanged.connect(
+            lambda: self._eq_widget.eq_dials.value_7.setText(
+                '{0:{1}} dB'.format(
+                    self._eq_widget.eq_dials.dial_7.value(),
+                    '+' if self._eq_widget.eq_dials.dial_7.value() > 0 else ' '
+                )
+            )
+        )
+        self._eq_widget.eq_dials.dial_8.valueChanged.connect(
+            lambda: self._eq_widget.eq_dials.value_8.setText(
+                '{0:{1}} dB'.format(
+                    self._eq_widget.eq_dials.dial_8.value(),
+                    '+' if self._eq_widget.eq_dials.dial_8.value() > 0 else ' '
+                )
+            )
+        )
+        self._eq_widget.eq_dials.dial_9.valueChanged.connect(
+            lambda: self._eq_widget.eq_dials.value_9.setText(
+                '{0:{1}} dB'.format(
+                    self._eq_widget.eq_dials.dial_9.value(),
+                    '+' if self._eq_widget.eq_dials.dial_9.value() > 0 else ' '
+                )
+            )
+        )
+        self._eq_widget.eq_dials.dial_10.valueChanged.connect(
+            lambda: self._eq_widget.eq_dials.value_10.setText(
+                '{0:{1}} dB'.format(
+                    self._eq_widget.eq_dials.dial_10.value(),
+                    '+' if self._eq_widget.eq_dials.dial_10.value() > 0 else ' '
+                )
+            )
+        )
 
     def on_open(self) -> None:  # TODO user must always select a file, prevent him from closing the dialog somehow
         debug = r"/Documents/_wichtig/Hochschule/3. Semester/MSV/Projekt/gryphon-equalizer/examples"
