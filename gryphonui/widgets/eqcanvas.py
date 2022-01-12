@@ -30,6 +30,8 @@ class EQCanvas(FigureCanvasQTAgg):
         x_values: ndarray = np.linspace(start=0, stop=duration, num=num_of_samples)  # calculate the sampling on x axis
         y_values: ndarray = input_signal / max_sample_value if normalize else input_signal  # normalize values to [-1, 1]
 
+        self._figure.tight_layout()      # prevent cut-off of text on labels
+
         axes: Axes = self._axes
         axes.clear()
 
@@ -48,6 +50,8 @@ class EQCanvas(FigureCanvasQTAgg):
     def plot_freq_domain(self, frequencies: ndarray, amplitudes: ndarray, normalize=True) -> None:
         x_values: ndarray = frequencies
         y_values: ndarray = amplitudes / np.max(amplitudes) if normalize else amplitudes  # normalize values to [-1, 1]
+
+        self._figure.tight_layout()     # prevent cut-off of text on labels
 
         axes: Axes = self._axes
         axes.clear()
@@ -85,5 +89,6 @@ class EQCanvas(FigureCanvasQTAgg):
         axes.fill_between(x_values, y_values, -90)
         axes.grid(True)
         axes.set_axisbelow(True)
+        axes.tick_params(which='minor', bottom=False)
 
         self.draw()  # draw the graph
