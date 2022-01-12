@@ -6,7 +6,7 @@ from matplotlib.axes import Axes
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
 
-# TODO remove minor ticks in freq domain graph
+
 matplotlib.use('QtAgg')
 
 
@@ -44,6 +44,7 @@ class EQCanvas(FigureCanvasQTAgg):
 
         self.draw()  # draw the graph
 
+    # TODO remove minor ticks in freq domain graph
     def plot_freq_domain(self, frequencies: ndarray, amplitudes: ndarray, normalize=True) -> None:
         x_values: ndarray = frequencies
         y_values: ndarray = amplitudes / np.max(amplitudes) if normalize else amplitudes  # normalize values to [-1, 1]
@@ -64,6 +65,7 @@ class EQCanvas(FigureCanvasQTAgg):
 
         self.draw()  # draw the graph
 
+    # TODO remove minor ticks in freq domain db graph
     def plot_freq_domain_db(self, frequencies: ndarray, amplitudes_db: ndarray) -> None:
         x_values: ndarray = frequencies
         y_values: ndarray = amplitudes_db
