@@ -25,6 +25,8 @@ class EQCanvas(FigureCanvasQTAgg):
         self._X_TICKS: ndarray = np.asarray([20, 31, 62, 125, 250, 500, 1000, 2000, 4000, 8000, 16000])
         self._X_LABELS: ndarray = np.asarray(['20', '31', '62', '125', '250', '500', '1k', '2k', '4k', '8k', '16k'])
 
+        self._axes.tick_params(which='minor', bottom=False)
+
     def plot_time_domain(self, input_signal: ndarray, duration: float, num_of_samples: int, max_sample_value: int,
                          normalize=True) -> None:
         x_values: ndarray = np.linspace(start=0, stop=duration, num=num_of_samples)  # calculate the sampling on x axis
@@ -66,7 +68,6 @@ class EQCanvas(FigureCanvasQTAgg):
         axes.set_ylabel('Amplitude')
         axes.grid(True)
         axes.set_axisbelow(True)
-        axes.tick_params(which='minor', bottom=False)
 
         self.draw()  # draw the graph
 
@@ -89,6 +90,5 @@ class EQCanvas(FigureCanvasQTAgg):
         axes.fill_between(x_values, y_values, -90)
         axes.grid(True)
         axes.set_axisbelow(True)
-        axes.tick_params(which='minor', bottom=False)
 
         self.draw()  # draw the graph
