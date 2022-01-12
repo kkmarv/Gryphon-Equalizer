@@ -62,6 +62,7 @@ class EQCanvas(FigureCanvasQTAgg):
         axes.set_ylabel('Amplitude')
         axes.grid(True)
         axes.set_axisbelow(True)
+        axes.tick_params(which='minor', bottom=False)
 
         self.draw()  # draw the graph
 
