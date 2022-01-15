@@ -6,7 +6,7 @@ from PyQt6.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QFileDialog, QMen
 from typing import Union
 
 from src.equalpyzer.equalizer import Equalizer
-from src.equalpyzer.wavfile import Wavfile
+from src.equalpyzer.wavefile import WaveFile
 from src.gryphonui.widgets.designer.eq_control_buttons import EQControlButtons
 from src.gryphonui.widgets.eqmenubar import EQMenuBar
 from src.gryphonui.widgets.eqwidget import EQWidget
@@ -29,15 +29,18 @@ class MainWindow(QMainWindow):
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(app_id)
 
         # attribute declarations
-        self._eq_widget: EQWidget = EQWidget()
-        self._eq_control_buttons: EQControlButtons = EQControlButtons()
         self._eq: Union[Equalizer, None] = None
         self._canvas_view_mode: str = 'frequency-db'
+        self._eq_control_buttons: EQControlButtons = EQControlButtons()
+        self._eq_widget: EQWidget = EQWidget(
+            lambda db_boost, low_cut, high_cut: self.on_dial_change(db_boost, low_cut, high_cut)
+        )
 
         self.init_gui()
 
     def init_gui(self):
         """Initialize GUI components"""
+
         self.setWindowTitle(WINDOW_TITLE)
         self.setWindowIcon(QtGui.QIcon(ICON_PATH))
         self.setFixedSize(960, 540)
@@ -53,6 +56,7 @@ class MainWindow(QMainWindow):
         self.connect_menu_bar_methods()
 
         self.show()
+        self.on_open()
 
     def connect_menu_bar_methods(self) -> None:  # TODO outsource further
         menu_bar: Union[EQMenuBar, QMenuBar] = self.menuBar()
@@ -71,27 +75,31 @@ class MainWindow(QMainWindow):
 
     def on_open(self) -> None:  # TODO user must always select a file, prevent him from closing the dialog somehow
         debug = r"/Documents/_wichtig/Hochschule/3. Semester/MSV/Projekt/gryphon-equalizer/examples"
-        file_name, _ = QFileDialog.getOpenFileName(
+        file_path, _ = QFileDialog.getOpenFileName(
             self,
             "Open Wave Audio File",
             os.environ['USERPROFILE'] + debug,
             "Wave Files (*.wav)"
         )
-        if len(file_name) != 0:
-            self._wav = Wavfile(file_name)
-            self._eq = Equalizer(self._wav)
+
+        if len(file_path) != 0:
+            self._eq = Equalizer(WaveFile(file_path))
 
             self.update_plot(self._canvas_view_mode)
 
     def on_save(self):
-        file_name, _ = QFileDialog.getSaveFileName(
+        file_path, _ = QFileDialog.getSaveFileName(
             self,
             'Save as Wave Audio File',
             os.environ['USERPROFILE'] + r'\Desktop',
             "Wave Files (*.wav)"
         )
-        if len(file_name) != 0 and self._wav.input_signal is not None:
-            self._eq.save_wavfile(file_name)
+        if len(file_path) != 0:
+            self._eq.wav.save_signal(file_path, self._eq.altered_signal)
+
+    def on_dial_change(self, db_boost: int, low_cut: int, high_cut: int):
+        self._eq.boost(db_boost, low_cut, high_cut)
+        self.update_plot(self._canvas_view_mode)
 
     @staticmethod
     def on_exit():
@@ -101,26 +109,26 @@ class MainWindow(QMainWindow):
         if view_mode == 'time':
             self._canvas_view_mode = view_mode
             self._eq_widget.eq_canvas.plot_time_domain(
-                self._wav.input_signal,
-                self._wav.duration,
-                self._wav.num_of_samples,
-                self._wav.max_sample_value,
+                self._eq.wav.input_signal,
+                self._eq.wav.duration,
+                self._eq.wav.num_of_samples,
+                self._eq.wav.max_sample_value,
                 normalize=normalize
             )
 
         elif view_mode == 'frequency':
             self._canvas_view_mode = view_mode
             self._eq_widget.eq_canvas.plot_freq_domain(
-                self._eq.frequencies,
-                self._eq.amplitudes,
+                self._eq.wav.frequencies,
+                self._eq.altered_amplitudes,
                 normalize=normalize
             )
 
         elif view_mode == 'frequency-db':
             self._canvas_view_mode = view_mode
             self._eq_widget.eq_canvas.plot_freq_domain_db(
-                self._eq.frequencies,
-                self._eq.amplitudes_db
+                self._eq.wav.frequencies,
+                self._eq.altered_amplitudes_db
             )
 
         else:
