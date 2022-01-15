@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QWidget, QHBoxLayout
 
-from gryphonui.widgets.eqcanvas import EQCanvas
-from gryphonui.widgets.designer.eqdials import EQDials
+from src.gryphonui.widgets.eqcanvas import EQCanvas
+from src.gryphonui.widgets.designer.eqdials import EQDials
 
 
 class EQWidget(QWidget):

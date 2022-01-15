@@ -4,7 +4,7 @@ from numpy import ndarray
 from scipy.io import wavfile as wf
 from typing import Union
 
-from equalpyzer.wavfile import Wavfile
+from src.equalpyzer.wavfile import Wavfile
 
 
 class Equalizer:
