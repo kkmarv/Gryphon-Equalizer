@@ -5,11 +5,11 @@ from PyQt6 import QtGui
 from PyQt6.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QFileDialog, QMenuBar
 from typing import Union
 
-from src.equalpyzer.equalizer import Equalizer
 from src.equalpyzer.wavefile import WaveFile
-from src.gryphonui.widgets.designer.eq_control_buttons import EQControlButtons
-from src.gryphonui.widgets.eqmenubar import EQMenuBar
+from src.equalpyzer.equalizer import Equalizer
 from src.gryphonui.widgets.eqwidget import EQWidget
+from src.gryphonui.widgets.eqmenubar import EQMenuBar
+from src.gryphonui.widgets.designer.eq_control_buttons import EQControlButtons
 
 
 # prevent downscaling when moving between monitors of different resolutions, may not be working

@@ -24,12 +24,12 @@ class Equalizer:
         high_cut = self.wav.frequencies[-1] if high_cut is None else high_cut
 
         # apply boost on a simple rectangle window # TODO use different window function
-        self.altered_amplitudes_db = self.wav.amplitudes_db.copy()
-        self.altered_amplitudes_db[(self.wav.frequencies > low_cut) & (self.wav.frequencies < high_cut)] += decibels
+        freq_band = (self.wav.frequencies >= low_cut) & (self.wav.frequencies <= high_cut)
+        self.altered_amplitudes_db[freq_band] = self.wav.amplitudes_db[freq_band] + decibels
 
         # reverse the dBFS conversion and apply boost to amplitudes
-        scaled_amp_values = self.wav.max_sample_value * np.power(10, self.altered_amplitudes_db / 20)
-        self.altered_amplitudes = scaled_amp_values * len(self.altered_amplitudes)
+        scaled_amp_values: ndarray = self.wav.max_sample_value * np.power(10, self.altered_amplitudes_db / 20)
+        self.altered_amplitudes = scaled_amp_values / 2 * len(self.altered_amplitudes)
 
-        # save altered signal
+        # write to signal
         self.altered_signal = np.fft.irfft(self.altered_amplitudes)

@@ -81,7 +81,7 @@ class EQDials(QWidget):  # TODO outsource dial and label together into a single 
         high_cut: int = 0
 
         if mid_value == 32:
-            low_cut = 20
+            low_cut = 0
             high_cut = 63
         elif mid_value == 64:
             low_cut = 33
