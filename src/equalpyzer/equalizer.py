@@ -28,7 +28,8 @@ class Equalizer:
         self.altered_amplitudes_db[freq_band] = self.wav.amplitudes_db[freq_band] + decibels
 
         # reverse the dBFS conversion and apply boost to amplitudes
-        scaled_amp_values: ndarray = self.wav.max_sample_value * np.power(10, self.altered_amplitudes_db / 20)
+        # (note: self.wav.loudest_samp_value should be self.wav.loudest_samp_value but this has less clipping with ints)
+        scaled_amp_values: ndarray = self.wav.loudest_samp_value * np.power(10, self.altered_amplitudes_db / 20)
         self.altered_amplitudes = scaled_amp_values / 2 * len(self.altered_amplitudes)
 
         # write to signal

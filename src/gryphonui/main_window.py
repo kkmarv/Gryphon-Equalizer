@@ -112,7 +112,7 @@ class MainWindow(QMainWindow):
                 self._eq.wav.input_signal,
                 self._eq.wav.duration,
                 self._eq.wav.num_of_samples,
-                self._eq.wav.max_sample_value,
+                self._eq.wav.loudest_samp_value,
                 normalize=normalize
             )
 
