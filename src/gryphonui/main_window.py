@@ -11,12 +11,7 @@ from src.gryphonui.widgets.eqwidget import EQWidget
 from src.gryphonui.widgets.eqmenubar import EQMenuBar
 from src.gryphonui.widgets.designer.eq_control_buttons import EQControlButtons
 
-
-# prevent downscaling when moving between monitors of different resolutions, may not be working
-# os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
-
-
-APP_ID: str = 'hallo.du.bist.doof'
+APP_ID: str = 'wer.das.liest.ist.toni.oder.eben.nicht'
 ICON_PATH: str = 'gryphonui/widgets/designer/assets/pepe_jam.png'
 WINDOW_TITLE: str = 'Gryphon Equalizer'
 
@@ -69,22 +64,19 @@ class MainWindow(QMainWindow):
         menu_bar.change_view_to_freq_action.triggered.connect(lambda: self.update_plot('frequency'))
         menu_bar.change_view_to_freqdb_action.triggered.connect(lambda: self.update_plot('frequency-db'))
 
-    def connect_buttons(self):  # TODO outsource further into own EQPlayer class sonst pussy
-        self._eq_control_buttons.PlayPauseButton.setEnabled(False)
+    def connect_buttons(self):
         self._eq_control_buttons.ResetDialsButton.clicked.connect(lambda: self._eq_widget.eq_dials.reset_dials())
 
     def on_open(self) -> None:  # TODO user must always select a file, prevent him from closing the dialog somehow
-        debug = r"/Documents/_wichtig/Hochschule/3. Semester/MSV/Projekt/gryphon-equalizer/examples"
         file_path, _ = QFileDialog.getOpenFileName(
             self,
             "Open Wave Audio File",
-            os.environ['USERPROFILE'] + debug,
+            os.environ['USERPROFILE'],
             "Wave Files (*.wav)"
         )
 
         if len(file_path) != 0:
             self._eq = Equalizer(WaveFile(file_path))
-
             self.update_plot(self._canvas_view_mode)
 
     def on_save(self):
