@@ -11,7 +11,7 @@ from src.gryphonui.widgets.eqwidget import EQWidget
 from src.gryphonui.widgets.eqmenubar import EQMenuBar
 from src.gryphonui.widgets.designer.eq_control_buttons import EQControlButtons
 
-APP_ID: str = 'wer.das.liest.ist.toni.oder.eben.nicht'
+APP_ID: str = 'wer.das.liest.ist.toni.oder.eben.nich'
 ICON_PATH: str = 'gryphonui/widgets/designer/assets/pepe_jam.png'
 WINDOW_TITLE: str = 'Gryphon Equalizer'
 
