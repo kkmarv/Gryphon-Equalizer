@@ -4,23 +4,44 @@ Der Gryphon Equalizer (zusammengesetzt aus den Wörtern Python und Graphic Equal
 dessen Hilfe beliebige mono Wave Dateien eingelesen und deren Frequenzbänder grafisch manipuliert werden können.
 
 Er ist das Ergebnis des Moduls "Multimediale Signalverarbeitung" der Hochschule Anhalt in Köthen, in dem Studierende ein
-Programm entwickeln und programmieren sollen. Die einzige Einschränkung dabei ist die thematische Gebundenheit an einen
+Programm entwickeln und programmieren sollten. Die einzige Einschränkung dabei war die thematische Gebundenheit an einen
 multimedialen Anwendungsfall.
 
 ## Inhalt
 
 1. [Motivation](#motivation)
-2. [Ziel]()
-3. [Konzept]()
-4. [Umsetzung]()
-5. [Fazit zum Projekt]()
-6. [Future Work]()
+2. [Ziel](#ziel)
+3. [Konzept](#konzept)
+4. [Umsetzung](#umsetzung)
+5. [Fazit](#fazit)
+6. [Future Work](#future-work)
 
 ## Motivation
 
+Abgesehen von der extrinsischen Motivation das Modul gut zu bestehen, geht es uns bei diesem Projekt hauptsächlich um
+zweierlei Arten von Wissen, die wir erlernen konnten.
+
+Die technischen Aspekte: Die Anwendung der in der Wissenschaft weit verbreiteten Hochsprache Python und seinem numpy
+Paket. Python eignet sich für das reine Programmieren von Formeln und der Anwendung von Techniken aus der Vorlesung
+besonders gut, da Dinge wie Speicherverwaltung, die nur zu den Eigenheiten der Sprache gehören und nicht für das Wissen
+dieses speziellen Moduls vonnöten sind, außen vor gelassen werden. Das Verständnis von mathematischen und
+soundtechnischen Eigenheiten lag hier im Vordergrund.
+
+Und ebenfalls das GUI-Design in Python: Das QT Framework ist auch in anderen Sprachen sehr weit verbreitet, was uns
+somit einen gewissen Vorsprung in der Unternehmenslandschaft verschafft. Aber auch hier gilt, dass wir uns eher auf die
+Logik hinter der GUI und auf das eigentliche Design konzentrieren konnten, anstatt uns mit der Erstellung einer
+kompletten Nutzeroberfläche zu beschäftigen.
+
 ## Ziel
 
-(Was ist das Problem bzw. was wollen wir erreichen)
+Unser Ziel war von vornherein ein simples GUI, welches dem Nutzer erlaubt, eine .wav Audiodatei mithilfe von:
+
+- dem visualisierten Frequenzbereich des (bearbeiteten) Eingangssignals,
+- dem visualisierten Frequenzbereich des modifizierenden Signals und
+- unterschiedlichen Drehreglern, jeder zu bestimmten Teilfrequenzbereichen zugeordnet (z.B. Höhen, Mitten, Tiefen) zur
+  Erhöhung/Verringerung der jeweiligen Amplitude
+
+zu bearbeiten und abzuspeichern.
 
 Im Folgenden sind die zu Beginn der Projektphase von uns selbst erstellten Anforderungen an das Endprodukt.  
 Diese enthalten sowohl harte Anforderungen, also solche, die wir unbedingt zum Ende des Bearbeitungszeitraums vollendet
@@ -61,7 +82,7 @@ Code Dokumentation hierhin.
 
 Die verwendeten Pakete können der [requirements.txt](./requirements.txt) entnommen werden.
 
-## Fazit zum Projekt
+## Fazit
 
 (Welche Schlussfolgerung ziehen wir aus dem Arbeitsprozess)
 
