@@ -1,5 +1,7 @@
 # Gryphon Equalizer
 
+_von Marvin Kästing & Pascal Wegener_
+
 Der Gryphon Equalizer (zusammengesetzt aus den Wörtern Python und Graphic Equalizer) ist ein 10-Band Equalizer, mit
 dessen Hilfe beliebige mono Wave Dateien eingelesen und deren Frequenzbänder grafisch manipuliert werden können.
 
@@ -52,21 +54,22 @@ nicht allzu wichtig eingestuft werden.
 
 Der Equalizer soll:
 
-- eine grafische Benutzeroberfläche für einen 10-Band Equalizer enthalten.
-- (mono) Wave Dateien einlesen können und:
-    - zehn Bänder im Frequenzbereich manipulieren können, sowie
-    - abspeichern können.
-- mindestens zur Benutzung unter Windows 10 funktionieren
+- [x] eine grafische Benutzeroberfläche für einen 10-Band Equalizer enthalten.
+- [x] (mono) Wave Dateien einlesen können und:
+    - [x] zehn Bänder im Frequenzbereich manipulieren können, sowie
+    - [x] abspeichern können.
+- [x] mindestens zur Benutzung unter Windows 10 funktionieren.
 
 ### Nice-to-Haves
 
 Der Equalizer könnte außerdem:
 
-- stereo Wave Dateien einlesen
-- eine Funktion zur Vorschau des (manipulierten) Signals enthalten.
-- einen Mikrofon-Stream:
-    - aufnehmen und abspeichern, sowie
-    - live manipulieren und ausgeben.
+- [ ] stereo Wave Dateien einlesen.
+- [ ] eine Funktion zur Vorschau des (manipulierten) Signals enthalten.
+- [ ] einen Mikrofon-Stream:
+    - [ ] aufnehmen und abspeichern, sowie
+    - [ ] live manipulieren und ausgeben.
+- [ ] mittels einer ausführbaren Datei (.exe) benutzbar sein.
 
 ## Konzept
 
