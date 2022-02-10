@@ -57,7 +57,7 @@ Bilder und Zeugs aus den Issues hierhin.
 
 (So wurde es praktisch umgesetzt)
 
-Code Dokumentation hier.
+Code Dokumentation hierhin.
 
 Die verwendeten Pakete können der [requirements.txt](./requirements.txt) entnommen werden.
 
@@ -69,7 +69,7 @@ Die verwendeten Pakete können der [requirements.txt](./requirements.txt) entnom
 
 Unserer Auffassung nach ist dieses Projekt nur bedingt und eher zur eigenen Übung in der Zukunft nutzbar, da es an sich
 keinen Mehrwert bietet. Es gibt bereits einige gute Equalizer und DAWs auf dem Markt, die sogar als open-source Software
-vertrieben werden und deutlich effizienter gestaltet sind, als dieser.  
+vertrieben werden und deutlich effizienter gestaltet sind, als dieses.  
 Dennoch wollen wir hier einen kleinen Ausblick auf Optionen zur Weiterentwicklung des Equalizers geben.
 
 Mögliche Einstiegspunkte zur weiteren Bearbeitung (ob nun durch uns oder durch ein anderes Team) wurden bereits im
