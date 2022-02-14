@@ -4,6 +4,8 @@
 
 Der Gryphon Equalizer ist objektorientiert. Im Folgenden werden alle Klassen mitsamt Methoden erläutert.
 
+Zur Installation der notwendigen Pakete siehe [How to get started.](./usage.md)
+
 ## Klassen
 
 - equalpyzer/
