@@ -2,24 +2,5 @@
 
 # EQControlButtons
 
-## Klassenattribute
-
-| Attribut | Typ | Beschreibung |
-| ------ | ------ | ------ |
-| `` | `` | | 
-
-## Klassenmethoden
-
-| Methode | Typ | Beschreibung |
-| ------ | ------ | ------ |
-| `` | `` | | 
-
-### !Methodenname<
-
-| Parameter | Typ | Beschreibung |
-| ------ | ------ | ------ |
-| `` | `` | | 
-
-| Rückgabetyp | Beschreibung |
-| ------ | ------ |
-| `` | | 
+Die Klasse `EQControlButtons` verwaltet die Buttons, welche generelle Funktionen des Equalizers ausführen. Ihr Layout
+wurde mit dem QT Designer definiert.
