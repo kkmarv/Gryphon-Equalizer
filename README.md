@@ -87,7 +87,7 @@ Aus den folgenden Aufgaben des Frontends:
 
 resultiert folgende Skizze:
 
-<img alt="Prototyp der GUI" width="70%" src="./docs/assets/GUI_Skizze.png"/>
+<img alt="Prototyp der GUI" width="80%" src="./docs/assets/GUI_Skizze.png"/>
 
 ### Backend (Signaltheorie)
 
@@ -111,7 +111,12 @@ Siehe [Quellcode Dokumentation](./docs/index.md)
 
 ## Fazit
 
-(Welche Schlussfolgerung ziehen wir aus dem Arbeitsprozess)
+Das Fazit stellt unsere Zusammenfassung und persönliche Erfahrung zum Arbeitsprozess während der praktischen Phase des
+Moduls dar.
+
+### Was wir gelernt haben
+
+### Was wir für zukünftige Projektarbeiten mitnehmen können
 
 ## Future work
 
