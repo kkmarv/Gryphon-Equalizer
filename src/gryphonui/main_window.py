@@ -11,6 +11,7 @@ from src.gryphonui.widgets.eqwidget import EQWidget
 from src.gryphonui.widgets.eqmenubar import EQMenuBar
 from src.gryphonui.widgets.designer.eq_control_buttons import EQControlButtons
 
+
 APP_ID: str = 'wer.das.liest.ist.toni.oder.eben.nich'
 ICON_PATH: str = 'gryphonui/widgets/designer/assets/pepe_jam.png'
 WINDOW_TITLE: str = 'Gryphon Equalizer'
@@ -28,12 +29,12 @@ class MainWindow(QMainWindow):
         self._canvas_view_mode: str = 'frequency-db'
         self._eq_control_buttons: EQControlButtons = EQControlButtons()
         self._eq_widget: EQWidget = EQWidget(
-            lambda db_boost, low_cut, high_cut: self.on_dial_change(db_boost, low_cut, high_cut)
+            lambda db_boost, low_cut, high_cut: self.__on_dial_change(db_boost, low_cut, high_cut)
         )
 
-        self.init_gui()
+        self.__init_gui()
 
-    def init_gui(self):
+    def __init_gui(self) -> None:
         """Initialize GUI components"""
 
         self.setWindowTitle(WINDOW_TITLE)
@@ -47,27 +48,27 @@ class MainWindow(QMainWindow):
         layout.addWidget(self._eq_control_buttons)
         self.centralWidget().setLayout(layout)
 
-        self.connect_buttons()
-        self.connect_menu_bar_methods()
+        self.__connect_buttons()
+        self.__connect_menu_bar_methods()
 
         self.show()
-        self.on_open()
+        self.__on_open()
 
-    def connect_menu_bar_methods(self) -> None:  # TODO outsource further
+    def __connect_menu_bar_methods(self) -> None:  # TODO outsource further
         menu_bar: Union[EQMenuBar, QMenuBar] = self.menuBar()
-        menu_bar.open_file_action.triggered.connect(lambda: self.on_open())
-        menu_bar.save_file_action.triggered.connect(lambda: self.on_save())
-        menu_bar.exit_app_action.triggered.connect(lambda: self.on_exit())
+        menu_bar.open_file_action.triggered.connect(lambda: self.__on_open())
+        menu_bar.save_file_action.triggered.connect(lambda: self.__on_save())
+        menu_bar.exit_app_action.triggered.connect(lambda: self.__on_exit())
         menu_bar.copy_content_action.triggered.connect(lambda: None)
         menu_bar.paste_content_action.triggered.connect(lambda: None)
-        menu_bar.change_view_to_time_action.triggered.connect(lambda: self.update_plot('time'))
-        menu_bar.change_view_to_freq_action.triggered.connect(lambda: self.update_plot('frequency'))
-        menu_bar.change_view_to_freqdb_action.triggered.connect(lambda: self.update_plot('frequency-db'))
+        menu_bar.change_view_to_time_action.triggered.connect(lambda: self.__update_plot('time'))
+        menu_bar.change_view_to_freq_action.triggered.connect(lambda: self.__update_plot('frequency'))
+        menu_bar.change_view_to_freqdb_action.triggered.connect(lambda: self.__update_plot('frequency-db'))
 
-    def connect_buttons(self):
-        self._eq_control_buttons.ResetDialsButton.clicked.connect(lambda: self._eq_widget.eq_dials.reset_dials())
+    def __connect_buttons(self) -> None:
+        self._eq_control_buttons.ResetDialsButton.clicked.connect(lambda: self._eq_widget.eq_dials.__reset_dials())
 
-    def on_open(self) -> None:  # TODO user must always select a file, prevent him from closing the dialog somehow
+    def __on_open(self) -> None:  # TODO user must always select a file, prevent him from closing the dialog somehow
         file_path, _ = QFileDialog.getOpenFileName(
             self,
             "Open Wave Audio File",
@@ -77,9 +78,9 @@ class MainWindow(QMainWindow):
 
         if len(file_path) != 0:
             self._eq = Equalizer(WaveFile(file_path))
-            self.update_plot(self._canvas_view_mode)
+            self.__update_plot(self._canvas_view_mode)
 
-    def on_save(self):
+    def __on_save(self) -> None:
         file_path, _ = QFileDialog.getSaveFileName(
             self,
             'Save as Wave Audio File',
@@ -89,15 +90,15 @@ class MainWindow(QMainWindow):
         if len(file_path) != 0:
             self._eq.wav.save_signal(file_path, self._eq.altered_signal)
 
-    def on_dial_change(self, db_boost: int, low_cut: int, high_cut: int):
+    def __on_dial_change(self, db_boost: int, low_cut: int, high_cut: int) -> None:
         self._eq.boost(db_boost, low_cut, high_cut)
-        self.update_plot(self._canvas_view_mode)
+        self.__update_plot(self._canvas_view_mode)
 
     @staticmethod
-    def on_exit():
+    def __on_exit() -> None:
         exit()
 
-    def update_plot(self, view_mode, normalize=True):
+    def __update_plot(self, view_mode, normalize=True) -> None:
         if view_mode == 'time':
             self._canvas_view_mode = view_mode
             self._eq_widget.eq_canvas.plot_time_domain(
