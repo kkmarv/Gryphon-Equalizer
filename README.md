@@ -87,7 +87,7 @@ Aus den folgenden Aufgaben des Frontends:
 
 resultiert folgende Skizze:
 
-<img alt="Prototyp der GUI" height="540" width="960" src="./docs/assets/GUI_Skizze.png"/>
+<img alt="Prototyp der GUI" width="50%" src="./docs/assets/GUI_Skizze.png"/>
 
 ### Backend (Signaltheorie)
 
