@@ -5,16 +5,16 @@
 > Equalizer that can be used to manipulate frequency bands from a wave file.
 
 Die `Equalizer` Klasse ist im Grunde nur noch ein Überbleibsel von Umstrukturierungen während der Projektarbeit. Sie
-enthält nur eine Methode, welche mithilfe eines Bandpass-Rechteckfilters das Frequenzband eines beliebigen Signals
+enthält nur eine einzige Methode, welche mithilfe eines Bandpass-Rechteckfilters das Frequenzband eines beliebigen Signals
 manipulieren kann.
 
 ## Klassenattribute
 
 | Attribut | Typ | Beschreibung |
 | ------ | ------ | ------ |
-| `altered_signal` | `ndarray` |  |
-| `altered_amplitudes` | `ndarray` |  |
-| `altered_amplitudes_db` | `ndarray` |  |
+| `altered_signal` | `ndarray` | Eine Kopie des Ausgangssignal, welche vom Equalizer verändert werden kann. |
+| `altered_amplitudes` | `ndarray` | Eine Kopie der Amplituden des Ausgangssignals, welche vom Equalizer verändert werden kann. |
+| `altered_amplitudes_db` | `ndarray` | Eine Kopie der Frequenzen des Ausgangssignals, welche vom Equalizer verändert werden kann. |
 
 ## Klassenmethoden
 
