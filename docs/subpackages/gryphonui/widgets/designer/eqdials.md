@@ -15,7 +15,7 @@ Diese Klasse hat keine nennenswerten Attribute.
 | ------ | ------ | ------ |
 | `__connect_dials` | - | Ordnet die Drehregler den entsprechenden Frequenzbändern zu.|
 | `__woof` | `dial` `freq_band_label` `db_label` | Ordnet die Funktion eines Drehreglers dem richtigen Frequenzband zu.  |
-| `__reset_dials` | - | Setzt alle Drehregler auf 0 dbFS zurück. |
+| `__reset_dials` | - | Setzt alle Drehregler auf `0` dbFS zurück. |
 
 ### __connect_dials
 
