@@ -115,14 +115,26 @@ Moduls dar.
 
 ### Was wir gelernt haben
 
-### Was wir für zukünftige Projektarbeiten mitnehmen können
+Wir haben gelernt, wie man eine grafische Benutzeroberfläche mithilfe von PyQt6 und eigenen Widgets erstellen kann, wie
+man diese im QTDesigner erstellt und dann importieren und verändern kann. Auch wie man einen mithilfe eines rudimentären
+Rechteckfilters Frequenzbänder auswählen kann, um diese dann weiter zu bearbeiten. Aufgefallen ist uns, wie viele
+Faktoren es beim Arbeiten mit Signalen und Sounddateien gibt, dass diese kompatibel zu den eigenen gewünschten Methoden
+sind und korrekt genutzt werden, um die Signale nicht ungewollt zu verändern.
+
+### Was wir für zukünftige Projektarbeiten mitnehmen
+
+Was wir von diesem Projekt mitnehmen können, ist genau das, was wir uns anfangs erhofft hatten: das weiter gefestigte
+Wissen über die Audiotechnik, das Planen, Organisieren und Implementieren eigener Anwendungen mit Python, sowie der
+Umgang mit den verschiedenen genutzten Bibliotheken (numpy, scipy, matplotlib und PyQt6).  
+Auch gerade zum Ende des Projekts wurde uns _realitätsnah_ gezeigt, wie wir gleichzeitig Anforderungen im Alltag
+nachkommen und Deadlines einhalten müssen. Wir denken, dass dies doch gut auf das spätere Berufsumfeld vorbereitet.
 
 ## Future work
 
 Unserer Auffassung nach ist dieses Projekt nur bedingt und eher zur eigenen Übung in der Zukunft nutzbar, da es an sich
 keinen Mehrwert bietet. Es gibt bereits einige gute Equalizer und DAWs auf dem Markt, die sogar als open-source Software
-vertrieben werden und deutlich effizienter gestaltet sind, als dieses.  
-Dennoch wollen wir hier einen kleinen Ausblick auf Optionen zur Weiterentwicklung des Equalizers geben.
+vertrieben werden und deutlich effizienter gestaltet sind, als dieses. Dennoch wollen wir hier einen kleinen Ausblick
+auf Optionen zur Weiterentwicklung des Equalizers geben.
 
 Mögliche Einstiegspunkte zur weiteren Bearbeitung (ob nun durch uns oder durch ein anderes Team) wurden bereits im
 Abschnitt [Nice-to-Haves](#nice-to-haves) genannt. Dazu kämen noch weitere Möglichkeiten zwecks Customization der GUI,

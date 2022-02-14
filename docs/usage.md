@@ -31,4 +31,4 @@ Letztlich kann das Programm über `main.py` gestartet werden:
 python main.py
 ```
 
-Die genauen Versionen der verwendeten Pakete können der [requirements.txt](./requirements.txt) entnommen werden.
+Die genauen Versionen der verwendeten Pakete können der [requirements.txt](../requirements.txt) entnommen werden.
