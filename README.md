@@ -79,11 +79,7 @@ Bilder und Zeugs aus den Issues hierhin.
 
 ## Umsetzung
 
-(So wurde es praktisch umgesetzt)
-
-Code Dokumentation hierhin.
-
-Die verwendeten Pakete können der [requirements.txt](./requirements.txt) entnommen werden.
+[Code Dokumentation](./docs/index.md)
 
 ## Fazit
 
