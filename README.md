@@ -73,13 +73,41 @@ Der Equalizer könnte außerdem:
 
 ## Konzept
 
-(Wie wollen das Problem theoretisch, konzeptuell angehen)
+Da die Entwicklung von Front- und Backend grundsätzlich gut thematisch getrennt werden kann, haben wir uns die beiden
+bei diesem Projekt auch untereinander aufgeteilt und parallel an beiden gearbeitet.
 
-Bilder und Zeugs aus den Issues hierhin.
+### Frontend (UX Design)
+
+Aus den folgenden Aufgaben des Frontends:
+
+- Auswählen einer (mono) Wave Datei
+- Grafisches Manipulieren von 10 Frequenzbändern dieser Signalwerte mittels Drehreglern
+    - Anzeigen des veränderten Signals
+- Abspeichern der manipulierten Datei
+
+resultiert folgende Skizze:
+
+<img alt="Prototyp der GUI" height="540" width="960" src="./docs/assets/GUI_Skizze.png"/>
+
+### Backend (Signaltheorie)
+
+Aus den Aufgaben des Frontends resultieren für das Backend folgende Aufgaben:
+
+- Das Einlesen eines Pfades und das Auslesen der Daten von einer beliebigen (mono) .wav Datei
+- Die Fouriertransformation einer beliebigen (mono) Wave Datei in den Frequenzbereich
+    - Die Übertragung und Speicherung dieser nicht normierten Werte in
+        - eine auf 1 normierte und
+        - eine auf Dezibel basierte Skalierung
+- Die Manipulation eines Frequenzbandes innerhalb der eingelesen Wave Datei
+
+Prinzipiell haben wir alle nötigen Grundlagen in der Vorlesung behandelt, womit wir das nötige Wissen zur
+Signalverarbeitung bereits zur Verfügung haben. Dennoch fehlen uns kleine Details, wie zum Beispiel die Konvertierung in
+eine Dezibel Skalierung oder das Auslesen eines Pfades, welches mittels der berühmt-berüchtigten Suchmaschine unserer
+Wahl nachgeschlagen wird.
 
 ## Umsetzung
 
-[Code Dokumentation](./docs/index.md)
+Siehe [Quellcode Dokumentation](./docs/index.md)
 
 ## Fazit
 
