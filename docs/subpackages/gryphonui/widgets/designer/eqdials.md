@@ -7,9 +7,7 @@ können. Ihr Layout wurde mit dem QT Designer definiert.
 
 ## Klassenattribute
 
-| Attribut | Typ | Beschreibung |
-| ------ | ------ | ------ |
-| `` | `` | | 
+Diese Klasse hat keine nennenswerten Attribute.
 
 ## Klassenmethoden
 
