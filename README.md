@@ -114,7 +114,7 @@ Siehe [Quellcode Dokumentation](./docs/index.md)
 Das Fazit stellt unsere Zusammenfassung und persönliche Erfahrung zum Arbeitsprozess während der praktischen Phase des
 Moduls dar.
 
-### Was wir gelernt haben
+### Was wir gelernt haben 
 
 Wir haben gelernt, wie man eine grafische Benutzeroberfläche mithilfe von PyQt6 und eigenen Widgets erstellen kann, wie
 man diese im QTDesigner erstellt und dann importieren und verändern kann. Auch wie man einen mithilfe eines rudimentären
