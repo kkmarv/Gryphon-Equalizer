@@ -2,15 +2,19 @@
 
 # Dokumentation
 
-Der Gryphon Equalizer nutzt die zwei folgenden Unterpakete:
+Der Gryphon Equalizer ist objektorientiert. Im Folgenden werden alle Klassen mitsamt Methoden erläutert.
 
-1. `equalpyzer`: das Backend, das zuständig für die Signalverarbeitung ist
-2. `gryphonui`: das Frontend, welches Eingaben des Nutzers entgegennimmt
+## Klassen
 
-| Parameter | Typ | Beschreibung |
-| ------ | ------ | ------ |
-| `path` | `str` | | 
-
-| Rückgabewert | Beschreibung |
-| ------ | ------ |
-| `` | | 
+- equalpyzer/
+    - [Equalizer](./subpackages/equalpyzer/equalizer.md)
+    - [Wavefile](./subpackages/equalpyzer/wavefile.md)
+- gryhonui/
+    - [MainWindow](./subpackages/gryphonui/main_window.md)
+    - widgets/
+        - [EQCanvas](./subpackages/gryphonui/widgets/eqcanvas.md)
+        - [EQMenuBar](./subpackages/gryphonui/widgets/eqmenubar.md)
+        - [EQWidget](./subpackages/gryphonui/widgets/eqwidget.md)
+        - designer/
+            - [EQControlButtons](./subpackages/gryphonui/widgets/designer/eq_contol_buttons.md)
+            - [EQDials](./subpackages/gryphonui/widgets/designer/eqdials.md)
