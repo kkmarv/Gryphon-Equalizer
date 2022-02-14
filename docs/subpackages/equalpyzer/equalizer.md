@@ -29,3 +29,7 @@ manipulieren kann.
 | `decibels` | `int` | Anzahl an Dezibel, um die das Intervall erhöht bzw. erniedrigt wird. |
 | `low_cut` | `int`, optional | Die untere Grenzfrequenz des Intervalls. Default ist 0. |
 | `high_cut` | `Union[int, None]`, optional | Die obere Grenzfrequenz des Intervalls. Default ist die höchste im Signal vorkommende Frequenz. |
+
+| Rückgabetyp | Beschreibung |
+| ------ | ------ |
+| `None` | - |

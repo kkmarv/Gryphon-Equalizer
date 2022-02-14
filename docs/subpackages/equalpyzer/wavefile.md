@@ -39,6 +39,10 @@ Signalamplituden in eine dbFS Skalierung - und zurück - ermöglicht.
 | ------ | ------ | ------ |
 | `path` | `str` | Der Pfad der zu öffnenden .wav Datei |
 
+| Rückgabetyp | Beschreibung |
+| ------ | ------ |
+| `void` | - |
+
 ### save_signal
 
 > Saves this or another wave file to path.
@@ -48,3 +52,6 @@ Signalamplituden in eine dbFS Skalierung - und zurück - ermöglicht.
 | `path` | `str` | Der Pfad, an den die .wav Datei geschrieben werden soll. Falls bereits existent, so wird die Datei überschrieben. |
 | `output_signal` | `ndarray` | Das zu schreibende Signal. |
 
+| Rückgabetyp | Beschreibung |
+| ------ | ------ |
+| `None` | - |
