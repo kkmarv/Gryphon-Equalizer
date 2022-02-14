@@ -1,3 +1,3 @@
-[Index](../../index.md) > gryphonui > **Main Window**
+[Index](../../index.md) > gryphonui > **MainWindow**
 
-# Main Window
+# MainWindow
