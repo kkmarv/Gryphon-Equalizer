@@ -1,8 +1,7 @@
 [Index](../../../index.md) > gryphonui > widgets > **EQWidget**
 
 # EQWidget
-Die Klasse `EQWidget` wird genutzt, um die `EQDials` und `EQCanvas` in ein Widget zusammenzuführen,
-um das gewünschte Layout im `MainWindow` zu erreichen.
+Die Klasse `EQWidget` ist ein Container, um die `EQDials` und `EQCanvas` Klassen in einem Widget zusammenzuführen.
 
 ## Klassenattribute
 
