@@ -29,7 +29,7 @@ Signalamplituden in eine dbFS Skalierung - und zurück - ermöglicht.
 | Methode | Parameter | Beschreibung |
 | ------ | ------ | ------ |
 | `load_signal` | `path` | Öffnet eine .wav Datei und liest alle relevanten Daten ein. |
-| `save_signal` | `path` `output_signal` | Schreibt ein gegebenes Signal an den gegebenen Pfad. |
+| `save_signal` | `path` `output_signal` | Schreibt ein gegebenes Signal an den gegebenen Pfad als .wav Datei. |
 
 ### load_signal
 
