@@ -11,7 +11,7 @@ Zur Installation der notwendigen Pakete siehe [How to get started.](./usage.md)
 - equalpyzer/
     - [Equalizer](./subpackages/equalpyzer/equalizer.md)
     - [Wavefile](./subpackages/equalpyzer/wavefile.md)
-- gryhonui/
+- gryphonui/
     - [MainWindow](./subpackages/gryphonui/main_window.md)
     - widgets/
         - [EQCanvas](./subpackages/gryphonui/widgets/eqcanvas.md)
